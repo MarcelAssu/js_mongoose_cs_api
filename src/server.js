@@ -7,12 +7,15 @@ class App {
         this.database();
         this.middlewares();
         this.routes();
-        this.express.listen(3001, () =>
-            console.log(`Sua API REST está funcionando na porta 3001 `)
+        this.express.listen(3002, () =>
+            console.log(`Sua API REST está funcionando na porta 3002 `)
         );
     }
     database() {
-        mongoose.connect(db.uri, { useNewUrlParser: true });
+        mongoose.connect(db.uri, { useNewUrlParser: true }).then(
+            () => {console.log(`Conectou no ${db.uri}`)},
+            err => {console.log(`Não Conectou no ${db.uri}`)}
+        );
     }
     middlewares() {
         this.express.use(express.json());
